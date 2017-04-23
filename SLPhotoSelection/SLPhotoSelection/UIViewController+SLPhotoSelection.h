@@ -11,8 +11,16 @@
 
 @interface UIViewController (SLPhotoSelection) <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (copy) void (^completionBlock)(BOOL, UIImage *);
+@property (copy) void (^completionBlock)(BOOL, id);
 
-- (void)addPhotoWithCompletionHandler:(void(^)(BOOL success, UIImage *image))completionHandler;
+@property (copy) void (^multipleCompletionBlock)(BOOL, NSMutableArray *);
+
+- (void)addPhotoWithCompletionHandler:(void(^)(BOOL success, id))completionHandler;
+
+- (void)addVideoWithCompletionHandler:(void(^)(BOOL success, id))completionHandler;
+
+- (void)selectMultiplePhotoWithCompletionHandler:(void(^)(BOOL success, NSMutableArray *multiplePhotos))completionHandler;
+
+- (void)selectMultipleVideoWithCompletionHandler:(void(^)(BOOL success, NSMutableArray *multipleVideo))completionHandler;
 
 @end
