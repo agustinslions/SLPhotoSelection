@@ -18,6 +18,8 @@
 
 @implementation SLSelectionViewController
 
+#pragma mark - LifeCycle methods
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -27,6 +29,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Actions methods
 
 - (IBAction)backAction:(id)sender
 {
@@ -50,6 +54,8 @@
             break;
     }
 }
+
+#pragma mark - Private methods
 
 - (void)singlePhotoSelection
 {

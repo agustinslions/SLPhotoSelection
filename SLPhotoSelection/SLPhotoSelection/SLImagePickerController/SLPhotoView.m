@@ -7,6 +7,7 @@
 //
 
 #import "SLPhotoView.h"
+#import "SLPhotoManager.h"
 
 @interface SLPhotoView ()
 
@@ -76,7 +77,7 @@ selectionVideoBlock:(VideoSelectionBlock)selectionVideoBlock
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self addSubview:imageView];
     
-    [self loadImage:self.asset completion:^(UIImage *image, NSDictionary *info) {
+    [SLPhotoManager loadImage:self.asset completion:^(UIImage *image, NSDictionary *info) {
         self.imageAsset = image;
         imageView.image = image;
     }];
@@ -90,21 +91,6 @@ selectionVideoBlock:(VideoSelectionBlock)selectionVideoBlock
         [self.actionButton addTarget:self action:@selector(selectionButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.actionButton];
     }
-}
-
-- (void)loadImage:(PHAsset *)asset completion:(void(^)(UIImage *image, NSDictionary *info))completion
-{
-    PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
-    requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
-    requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    
-    PHImageManager *manager = [PHImageManager defaultManager];
-    
-    [manager requestImageForAsset:asset
-                       targetSize:PHImageManagerMaximumSize
-                      contentMode:PHImageContentModeDefault
-                          options:requestOptions
-                    resultHandler:completion];
 }
 
 - (void)selectionButton

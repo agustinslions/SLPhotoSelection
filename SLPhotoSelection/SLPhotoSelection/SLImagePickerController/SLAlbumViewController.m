@@ -22,10 +22,15 @@
 
 @implementation SLAlbumViewController
 
+#pragma mark - LifeCycle methods
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self requestAuthorizationCompletion:^{
+    
+    [self setUpNavigationBarButton];
+    
+    [SLPhotoManager requestAuthorizationCompletion:^{
         [self getAlbumsAssets];
     } failure:^{
         if (self.multipleCompletionBlock) {
@@ -35,87 +40,39 @@
     }];
 }
 
-- (void)requestAuthorizationCompletion:(void(^)())completion failure:(void(^)())failure
-{
-    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-    if (status == PHAuthorizationStatusAuthorized) {
-        if (completion) completion();
-    } else {
-        //No permission. Trying to normally request it
-        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                if (status != PHAuthorizationStatusAuthorized) {
-                    //User don't give us permission. Showing alert with redirection to settings
-                    //Getting description string from info.plist file
-                    NSString *accessDescription = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
-                    
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:accessDescription
-                                                                                              message:@"To give permissions tap on 'Change Settings' button"
-                                                                                       preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
-                                                                           style:UIAlertActionStyleCancel
-                                                                         handler:^(UIAlertAction * _Nonnull action) {
-                                                                             if (failure) failure();
-                                                                         }];
-                    [alertController addAction:cancelAction];
-                    
-                    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Change Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        
-                        if (failure) failure();
-                        //TODO:
-//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]
-//                                                           options:nil
-//                                                 completionHandler:nil];
-                    }];
-                    [alertController addAction:settingsAction];
-                    
-                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
-                } else {
-                    if (completion) completion();
-                }
-            });
-        }];
-    }
-}
-
-- (void)getAlbumsAssets
-{
-    PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum
-                                                                          subtype:PHAssetCollectionSubtypeAlbumRegular
-                                                                          options:nil];
-    
-    //set up fetch options, mediaType is image.
-    PHFetchOptions *options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-    
-    switch (self.selectionType) {
-        case SLPhotoType: options.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d", PHAssetMediaTypeImage];
-            break;
-        case SLVideoType: options.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d", PHAssetMediaTypeVideo];
-            break;
-        default:
-            break;
-    }
-    
-    NSMutableArray *assets = [[NSMutableArray alloc] init];
-    
-    for (PHAssetCollection *assetCollection in smartAlbums) {
-        PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
-        if (assetsFetchResult.count > 0) [assets addObject:assetCollection];
-    }
-    
-    self.albumSelections = assets;
-    
-    [self.tableView reloadData];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - SetUp Methods
+
+- (void)setUpNavigationBarButton
+{
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                     target:self
+                                                                                     action:@selector(cancelAction)];
+    [self.navigationItem setRightBarButtonItem:cancelBarButton];
+}
+
+- (void)getAlbumsAssets
+{
+    self.albumSelections = [SLPhotoManager getAlbumsWithFilesType:self.selectionType];
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark - Action methods
+
+- (void)cancelAction
+{
+    if (self.multipleCompletionBlock) {
+        self.multipleCompletionBlock(NO, nil);
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -127,8 +84,7 @@
     static NSString *CellIdentifier = @"albumCellIdentifier";
     SLAlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    if (cell == nil)
-    {
+    if (cell == nil) {
         cell = [[SLAlbumTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
@@ -136,8 +92,15 @@
     
     cell.albumNameLabel.text = [assetCollection localizedTitle];
     
+    [SLPhotoManager loadFirstThumbnailForAssetCollection:assetCollection
+                                           withFilesType:self.selectionType
+                                              completion:^(UIImage *image, NSDictionary *info) {
+                                                  cell.photoAlbumImage.image = image;
+                                              }];
     return cell;
 }
+
+#pragma mark - UITableViewDelegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -147,6 +110,7 @@
                               sender:@{@"assetsCollection" : self.albumSelections[indexPath.row]}];
 }
 
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

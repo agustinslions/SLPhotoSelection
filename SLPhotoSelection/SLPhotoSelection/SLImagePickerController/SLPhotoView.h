@@ -20,7 +20,6 @@ typedef void (^VideoSelectionBlock)(PHAsset *video);
 @property (copy) VideoSelectionBlock selectionVideoBlock;
 @property (copy) VideoSelectionBlock deselectionVideoBlock;
 
-
 - (id)initWithFrame:(CGRect)frame
          withAssets:(PHAsset *)asset
      selectionBlock:(ImageSelectionBlock)selectionBlock

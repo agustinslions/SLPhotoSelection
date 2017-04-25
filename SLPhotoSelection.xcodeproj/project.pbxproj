@@ -15,6 +15,7 @@
 		410F25CD1E47735400FFB52A /* UIViewController+SLPhotoSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 410F25CC1E47735400FFB52A /* UIViewController+SLPhotoSelection.m */; };
 		417C2E5E1EAD2B440075BB7D /* SLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E5D1EAD2B440075BB7D /* SLHomeViewController.m */; };
 		417C2E611EAD2BCB0075BB7D /* SLSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E601EAD2BCB0075BB7D /* SLSelectionViewController.m */; };
+		417C2E641EAEE2940075BB7D /* SLPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E631EAEE2940075BB7D /* SLPhotoManager.m */; };
 		41F030411EAC1B1E00E28161 /* SLAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F0303F1EAC1B1E00E28161 /* SLAlbumViewController.m */; };
 		41F030461EAC1B7C00E28161 /* SLPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F030441EAC1B7C00E28161 /* SLPhotoViewController.m */; };
 		41F030491EAC327100E28161 /* SLImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F030481EAC327100E28161 /* SLImagePicker.storyboard */; };
@@ -37,6 +38,8 @@
 		417C2E5D1EAD2B440075BB7D /* SLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLHomeViewController.m; sourceTree = "<group>"; };
 		417C2E5F1EAD2BCB0075BB7D /* SLSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSelectionViewController.h; sourceTree = "<group>"; };
 		417C2E601EAD2BCB0075BB7D /* SLSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSelectionViewController.m; sourceTree = "<group>"; };
+		417C2E621EAEE2940075BB7D /* SLPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPhotoManager.h; sourceTree = "<group>"; };
+		417C2E631EAEE2940075BB7D /* SLPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPhotoManager.m; sourceTree = "<group>"; };
 		41F0303E1EAC1B1E00E28161 /* SLAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLAlbumViewController.h; sourceTree = "<group>"; };
 		41F0303F1EAC1B1E00E28161 /* SLAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLAlbumViewController.m; sourceTree = "<group>"; };
 		41F030431EAC1B7C00E28161 /* SLPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPhotoViewController.h; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 				41F0304B1EAC331C00E28161 /* SLAlbumTableViewCell.m */,
 				41F0304E1EAD037F00E28161 /* SLPhotoView.h */,
 				41F0304F1EAD037F00E28161 /* SLPhotoView.m */,
+				417C2E621EAEE2940075BB7D /* SLPhotoManager.h */,
+				417C2E631EAEE2940075BB7D /* SLPhotoManager.m */,
 			);
 			path = SLImagePickerController;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 				410F25CD1E47735400FFB52A /* UIViewController+SLPhotoSelection.m in Sources */,
 				417C2E611EAD2BCB0075BB7D /* SLSelectionViewController.m in Sources */,
 				417C2E5E1EAD2B440075BB7D /* SLHomeViewController.m in Sources */,
+				417C2E641EAEE2940075BB7D /* SLPhotoManager.m in Sources */,
 				41F0304C1EAC331C00E28161 /* SLAlbumTableViewCell.m in Sources */,
 				41F030461EAC1B7C00E28161 /* SLPhotoViewController.m in Sources */,
 				41F030501EAD037F00E28161 /* SLPhotoView.m in Sources */,
@@ -331,6 +337,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = QEXTZ9L4HQ;
 				INFOPLIST_FILE = SLPhotoSelection/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SouthLions.SLPhotoSelection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -347,6 +354,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SLPhotoSelection/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SouthLions.SLPhotoSelection;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -9,18 +9,25 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    SLSinglePhotoType,
+    SLSingleVideoType,
+    SLMultiplePhotoType,
+    SLMultipleVideoType
+} SLPhotoSelectionType;
+
+typedef void (^SLSelectionBlock)(BOOL success, id object);
+
 @interface UIViewController (SLPhotoSelection) <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (copy) void (^completionBlock)(BOOL, id);
+@property (copy) SLSelectionBlock completionBlock;
 
-@property (copy) void (^multipleCompletionBlock)(BOOL, NSMutableArray *);
+- (void)addPhotoWithCompletionHandler:(SLSelectionBlock)completionHandler;
 
-- (void)addPhotoWithCompletionHandler:(void(^)(BOOL success, id))completionHandler;
+- (void)addVideoWithCompletionHandler:(SLSelectionBlock)completionHandler;
 
-- (void)addVideoWithCompletionHandler:(void(^)(BOOL success, id))completionHandler;
+- (void)selectMultiplePhotoWithCompletionHandler:(SLSelectionBlock)completionHandler;
 
-- (void)selectMultiplePhotoWithCompletionHandler:(void(^)(BOOL success, NSMutableArray *multiplePhotos))completionHandler;
-
-- (void)selectMultipleVideoWithCompletionHandler:(void(^)(BOOL success, NSMutableArray *multipleVideo))completionHandler;
+- (void)selectMultipleVideoWithCompletionHandler:(SLSelectionBlock)completionHandler;
 
 @end

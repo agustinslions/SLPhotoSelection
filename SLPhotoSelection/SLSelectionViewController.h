@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef enum {
-    SLSinglePhotoType,
-    SLSingleVideoType,
-    SLMultiplePhotoType,
-    SLMultipleVideoType
-} SLPhotoSelectionType;
+#import "UIViewController+SLPhotoSelection.h"
 
 @interface SLSelectionViewController : UIViewController
 

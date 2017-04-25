@@ -33,7 +33,6 @@
     [self setUpPhotoImages];
     [self setUpNavigationBarButton];
     
-    
     [self setUpScrollImages];
 }
 
@@ -49,30 +48,12 @@
     self.selectedPhotoArray = [NSMutableArray array];
 }
 
+#pragma mark - Setup methods
+
 - (void)setUpPhotoImages
 {
-    NSMutableArray *libraryAssets = [NSMutableArray array];
-    
-    //set up fetch options, mediaType is image.
-    PHFetchOptions *options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-    
-    switch (self.selectionType) {
-        case SLPhotoType: options.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d", PHAssetMediaTypeImage];
-            break;
-        case SLVideoType: options.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d", PHAssetMediaTypeVideo];
-            break;
-        default:
-            break;
-    }
-    
-    PHFetchResult *collectionResult = [PHAsset fetchAssetsInAssetCollection:self.assetCollections options:options];
-    
-    [collectionResult enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-        [libraryAssets addObject:asset];
-    }];
-    
-    self.photoArray = libraryAssets;
+    self.photoArray = [SLPhotoManager getPHAssetsForAssetCollection:self.assetCollections
+                                                      withFilesType:self.selectionType];
 }
 
 - (void)setUpNavigationBarButton
@@ -82,8 +63,6 @@
                                                                                    action:@selector(doneAction)];
     [self.navigationItem setRightBarButtonItem:doneBarButton];
 }
-
-#pragma mark - Setup methods
 
 - (void)setUpScrollImages
 {
@@ -101,7 +80,8 @@
                                                 [self deselection:image];
                                             }];
         } else {
-            photoView = [[SLPhotoView alloc] initWithFrame:frame withAssets:self.photoArray[i]
+            photoView = [[SLPhotoView alloc] initWithFrame:frame
+                                                withAssets:self.photoArray[i]
                                        selectionVideoBlock:^(PHAsset *video) {
                                            [self selection:video];
                                        } deselectVideoBlock:^(PHAsset *video) {
