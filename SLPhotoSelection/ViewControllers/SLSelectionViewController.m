@@ -9,6 +9,9 @@
 #import "SLSelectionViewController.h"
 #import "UIViewController+SLPhotoSelection.h"
 #import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
+#import <Photos/PHImageManager.h>
+#import "SLPhotoView.h"
 
 @interface SLSelectionViewController ()
 
@@ -94,8 +97,25 @@
 
 - (void)multipleVideoSelection
 {
+    [[SLPhotoView appearance] setSelectionNibNameView:@"SLCustomSelectedView"];
+    
     [self selectMultipleVideoWithCompletionHandler:^(BOOL success, NSMutableArray *multipleVideo) {
         //TODO:
+        for (PHAsset *asset in multipleVideo) {
+            [[PHImageManager defaultManager] requestPlayerItemForVideo:asset
+                                                               options:nil
+                                                         resultHandler:^(AVPlayerItem * _Nullable playerItem, NSDictionary * _Nullable info) {
+                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                 AVPlayer *avPlayer = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+                                                                 AVPlayerLayer *avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
+                                                                 avPlayerLayer.frame = self.imageView.bounds;
+                                                                 [self.imageView.layer addSublayer:avPlayerLayer];
+                                                                 [avPlayer seekToTime:kCMTimeZero];
+                                                                 [avPlayer play];
+                                                             });
+                                                         }];
+            
+        }
     }];
 }
 

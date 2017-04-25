@@ -136,8 +136,13 @@ selectionVideoBlock:(VideoSelectionBlock)selectionVideoBlock
     if (isSelected) {
         
         if (!self.selectedUIView) {
-            self.selectedUIView = [[UIView alloc] initWithFrame:self.bounds];
-            self.selectedUIView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+            if (self.selectionNibNameView) {
+                self.selectedUIView = [[NSBundle mainBundle] loadNibNamed:self.selectionNibNameView owner:nil options:nil][0];
+                self.selectedUIView.frame = self.bounds;
+            } else {
+                self.selectedUIView = [[UIView alloc] initWithFrame:self.bounds];
+                self.selectedUIView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+            }
             [self addSubview:self.selectedUIView];
             [self bringSubviewToFront:self.actionButton];
         }

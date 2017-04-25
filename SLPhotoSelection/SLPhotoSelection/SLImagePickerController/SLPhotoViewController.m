@@ -9,7 +9,8 @@
 #import "SLPhotoViewController.h"
 #import "SLPhotoView.h"
 
-#define kWidthImageView     (self.view.frame.size.width / 3)
+#define kItemsPerLine       3
+#define kWidthImageView     (self.view.frame.size.width / kItemsPerLine)
 
 @interface SLPhotoViewController ()
 
@@ -67,7 +68,8 @@
 - (void)setUpScrollImages
 {
     for (int i = 0; i < [self.photoArray count]; i++) {
-        CGRect frame = CGRectMake((i % 3) * kWidthImageView, kWidthImageView * (int)(i/3), kWidthImageView, kWidthImageView);
+        CGRect frame = CGRectMake((i % kItemsPerLine) * kWidthImageView,
+                                  kWidthImageView * (int)(i/kItemsPerLine), kWidthImageView, kWidthImageView);
         
         SLPhotoView *photoView;
         

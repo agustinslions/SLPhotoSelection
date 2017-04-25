@@ -13,9 +13,10 @@
 		410F25BD1E4772EA00FFB52A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410F25BC1E4772EA00FFB52A /* Assets.xcassets */; };
 		410F25C01E4772EA00FFB52A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410F25BE1E4772EA00FFB52A /* LaunchScreen.storyboard */; };
 		410F25CD1E47735400FFB52A /* UIViewController+SLPhotoSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 410F25CC1E47735400FFB52A /* UIViewController+SLPhotoSelection.m */; };
-		417C2E5E1EAD2B440075BB7D /* SLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E5D1EAD2B440075BB7D /* SLHomeViewController.m */; };
-		417C2E611EAD2BCB0075BB7D /* SLSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E601EAD2BCB0075BB7D /* SLSelectionViewController.m */; };
 		417C2E641EAEE2940075BB7D /* SLPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E631EAEE2940075BB7D /* SLPhotoManager.m */; };
+		417C2E6C1EAEEF1D0075BB7D /* SLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E681EAEEF1D0075BB7D /* SLHomeViewController.m */; };
+		417C2E6D1EAEEF1D0075BB7D /* SLSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C2E6A1EAEEF1D0075BB7D /* SLSelectionViewController.m */; };
+		417C2E721EAEEF730075BB7D /* SLCustomSelectedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 417C2E711EAEEF730075BB7D /* SLCustomSelectedView.xib */; };
 		41F030411EAC1B1E00E28161 /* SLAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F0303F1EAC1B1E00E28161 /* SLAlbumViewController.m */; };
 		41F030461EAC1B7C00E28161 /* SLPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F030441EAC1B7C00E28161 /* SLPhotoViewController.m */; };
 		41F030491EAC327100E28161 /* SLImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F030481EAC327100E28161 /* SLImagePicker.storyboard */; };
@@ -34,12 +35,13 @@
 		410F25C11E4772EA00FFB52A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		410F25CB1E47735400FFB52A /* UIViewController+SLPhotoSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SLPhotoSelection.h"; sourceTree = "<group>"; };
 		410F25CC1E47735400FFB52A /* UIViewController+SLPhotoSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SLPhotoSelection.m"; sourceTree = "<group>"; };
-		417C2E5C1EAD2B440075BB7D /* SLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLHomeViewController.h; sourceTree = "<group>"; };
-		417C2E5D1EAD2B440075BB7D /* SLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLHomeViewController.m; sourceTree = "<group>"; };
-		417C2E5F1EAD2BCB0075BB7D /* SLSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSelectionViewController.h; sourceTree = "<group>"; };
-		417C2E601EAD2BCB0075BB7D /* SLSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSelectionViewController.m; sourceTree = "<group>"; };
 		417C2E621EAEE2940075BB7D /* SLPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPhotoManager.h; sourceTree = "<group>"; };
 		417C2E631EAEE2940075BB7D /* SLPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPhotoManager.m; sourceTree = "<group>"; };
+		417C2E671EAEEF1D0075BB7D /* SLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLHomeViewController.h; sourceTree = "<group>"; };
+		417C2E681EAEEF1D0075BB7D /* SLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLHomeViewController.m; sourceTree = "<group>"; };
+		417C2E691EAEEF1D0075BB7D /* SLSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSelectionViewController.h; sourceTree = "<group>"; };
+		417C2E6A1EAEEF1D0075BB7D /* SLSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSelectionViewController.m; sourceTree = "<group>"; };
+		417C2E711EAEEF730075BB7D /* SLCustomSelectedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SLCustomSelectedView.xib; sourceTree = "<group>"; };
 		41F0303E1EAC1B1E00E28161 /* SLAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLAlbumViewController.h; sourceTree = "<group>"; };
 		41F0303F1EAC1B1E00E28161 /* SLAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLAlbumViewController.m; sourceTree = "<group>"; };
 		41F030431EAC1B7C00E28161 /* SLPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPhotoViewController.h; sourceTree = "<group>"; };
@@ -82,12 +84,10 @@
 			isa = PBXGroup;
 			children = (
 				410F25C71E47730D00FFB52A /* SLPhotoSelection */,
+				417C2E661EAEEF1D0075BB7D /* ViewControllers */,
+				417C2E6B1EAEEF1D0075BB7D /* Views */,
 				410F25B31E4772EA00FFB52A /* AppDelegate.h */,
 				410F25B41E4772EA00FFB52A /* AppDelegate.m */,
-				417C2E5F1EAD2BCB0075BB7D /* SLSelectionViewController.h */,
-				417C2E601EAD2BCB0075BB7D /* SLSelectionViewController.m */,
-				417C2E5C1EAD2B440075BB7D /* SLHomeViewController.h */,
-				417C2E5D1EAD2B440075BB7D /* SLHomeViewController.m */,
 				410F25B91E4772EA00FFB52A /* Main.storyboard */,
 				410F25BC1E4772EA00FFB52A /* Assets.xcassets */,
 				410F25BE1E4772EA00FFB52A /* LaunchScreen.storyboard */,
@@ -113,6 +113,25 @@
 				410F25CC1E47735400FFB52A /* UIViewController+SLPhotoSelection.m */,
 			);
 			path = SLPhotoSelection;
+			sourceTree = "<group>";
+		};
+		417C2E661EAEEF1D0075BB7D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				417C2E671EAEEF1D0075BB7D /* SLHomeViewController.h */,
+				417C2E681EAEEF1D0075BB7D /* SLHomeViewController.m */,
+				417C2E691EAEEF1D0075BB7D /* SLSelectionViewController.h */,
+				417C2E6A1EAEEF1D0075BB7D /* SLSelectionViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		417C2E6B1EAEEF1D0075BB7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				417C2E711EAEEF730075BB7D /* SLCustomSelectedView.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		41F0303D1EAC1AAA00E28161 /* SLImagePickerController */ = {
@@ -192,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				417C2E721EAEEF730075BB7D /* SLCustomSelectedView.xib in Resources */,
 				410F25C01E4772EA00FFB52A /* LaunchScreen.storyboard in Resources */,
 				410F25BD1E4772EA00FFB52A /* Assets.xcassets in Resources */,
 				410F25BB1E4772EA00FFB52A /* Main.storyboard in Resources */,
@@ -207,9 +227,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				410F25CD1E47735400FFB52A /* UIViewController+SLPhotoSelection.m in Sources */,
-				417C2E611EAD2BCB0075BB7D /* SLSelectionViewController.m in Sources */,
-				417C2E5E1EAD2B440075BB7D /* SLHomeViewController.m in Sources */,
 				417C2E641EAEE2940075BB7D /* SLPhotoManager.m in Sources */,
+				417C2E6D1EAEEF1D0075BB7D /* SLSelectionViewController.m in Sources */,
+				417C2E6C1EAEEF1D0075BB7D /* SLHomeViewController.m in Sources */,
 				41F0304C1EAC331C00E28161 /* SLAlbumTableViewCell.m in Sources */,
 				41F030461EAC1B7C00E28161 /* SLPhotoViewController.m in Sources */,
 				41F030501EAD037F00E28161 /* SLPhotoView.m in Sources */,

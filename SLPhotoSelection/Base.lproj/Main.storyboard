@@ -392,12 +392,26 @@
                                     <action selector="backAction:" destination="2ha-iT-VU9" eventType="touchUpInside" id="Pjp-E9-61j"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="4rG-8f-1DT">
+                                <rect key="frame" x="62.5" y="208.5" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="Z9i-Kl-iQ7"/>
+                                    <constraint firstAttribute="width" constant="250" id="nF8-07-SJG"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.98850824960000006" green="0.6706113722" blue="0.94840772009999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Jtg-Sq-Sxg" firstAttribute="leading" secondItem="qIr-bR-GxP" secondAttribute="leading" constant="9" id="8CT-lG-C4E"/>
+                            <constraint firstItem="4rG-8f-1DT" firstAttribute="centerY" secondItem="qIr-bR-GxP" secondAttribute="centerY" id="9hz-RJ-SCD"/>
                             <constraint firstAttribute="trailing" secondItem="Ryl-X5-2dN" secondAttribute="trailing" id="B8r-aJ-6gP"/>
                             <constraint firstItem="pdE-mE-oXZ" firstAttribute="leading" secondItem="qIr-bR-GxP" secondAttribute="leading" id="Fwn-rV-z9i"/>
+                            <constraint firstItem="4rG-8f-1DT" firstAttribute="centerX" secondItem="qIr-bR-GxP" secondAttribute="centerX" id="NDy-ep-VuO"/>
                             <constraint firstItem="Ryl-X5-2dN" firstAttribute="top" secondItem="GnT-k9-FoZ" secondAttribute="bottom" id="Yk0-w2-ORZ"/>
                             <constraint firstItem="nrm-cn-Rdz" firstAttribute="top" secondItem="pdE-mE-oXZ" secondAttribute="bottom" id="ZnZ-QL-Imt"/>
                             <constraint firstAttribute="trailing" secondItem="pdE-mE-oXZ" secondAttribute="trailing" id="cj0-Ab-J8a"/>
@@ -405,6 +419,9 @@
                             <constraint firstItem="Jtg-Sq-Sxg" firstAttribute="top" secondItem="GnT-k9-FoZ" secondAttribute="bottom" constant="2" id="sPM-gZ-GVh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="4rG-8f-1DT" id="aSV-CG-5xU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xuX-mD-Ano" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQ8-bh-f7u">
+                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckImage" translatesAutoresizingMaskIntoConstraints="NO" id="PCf-8T-CgK">
+                    <rect key="frame" x="90" y="90" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="8pd-Ge-9HZ"/>
+                        <constraint firstAttribute="width" constant="20" id="hOY-Af-Tua"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="rQ8-bh-f7u" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="26G-HX-VKP"/>
+                <constraint firstAttribute="trailing" secondItem="rQ8-bh-f7u" secondAttribute="trailing" id="D7X-dn-wA1"/>
+                <constraint firstAttribute="trailing" secondItem="PCf-8T-CgK" secondAttribute="trailing" constant="10" id="KbF-9J-iZl"/>
+                <constraint firstAttribute="bottom" secondItem="PCf-8T-CgK" secondAttribute="bottom" constant="10" id="YFS-Wg-h4k"/>
+                <constraint firstItem="rQ8-bh-f7u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="b2L-sP-qAX"/>
+                <constraint firstAttribute="bottom" secondItem="rQ8-bh-f7u" secondAttribute="bottom" id="puN-Os-COF"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CheckImage" width="20" height="20"/>
+    </resources>
+</document>
