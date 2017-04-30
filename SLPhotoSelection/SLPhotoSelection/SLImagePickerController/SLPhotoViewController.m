@@ -73,24 +73,13 @@
         
         SLPhotoView *photoView;
         
-        if (self.selectionType == SLPhotoType) {
-            photoView = [[SLPhotoView alloc] initWithFrame:frame
-                                                withAssets:self.photoArray[i]
-                                            selectionBlock:^(UIImage *image) {
-                                                [self selection:image];
-                                            } deselectBlock:^(UIImage *image) {
-                                                [self deselection:image];
-                                            }];
-        } else {
-            photoView = [[SLPhotoView alloc] initWithFrame:frame
-                                                withAssets:self.photoArray[i]
-                                       selectionVideoBlock:^(PHAsset *video) {
-                                           [self selection:video];
-                                       } deselectVideoBlock:^(PHAsset *video) {
-                                           [self deselection:video];
-                                       }];
-                         
-        }
+        photoView = [[SLPhotoView alloc] initWithFrame:frame
+                                            withAssets:self.photoArray[i]
+                                        selectionBlock:^(PHAsset *asset) {
+                                            [self selection:asset];
+                                        } deselectBlock:^(PHAsset *asset) {
+                                            [self deselection:asset];
+                                        }];
         
         [self.scrollView addSubview:photoView];
     }

@@ -16,7 +16,6 @@
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, strong) UIView *selectedUIView;
 @property (nonatomic, strong) UIButton *actionButton;
-@property (nonatomic, assign) BOOL isImagePreview;
 
 @end
 
@@ -24,40 +23,17 @@
 
 - (id)initWithFrame:(CGRect)frame
          withAssets:(PHAsset *)asset
-     selectionBlock:(ImageSelectionBlock)selectionBlock
-      deselectBlock:(ImageSelectionBlock)deselectionBlock
+     selectionBlock:(SLAssetSelectionBlock)selectionBlock
+      deselectBlock:(SLAssetSelectionBlock)deselectionBlock
 {
     self = [super initWithFrame:frame];
     
     if (self) {
         
-        self.isImagePreview = YES;
         self.isSelected = NO;
         
         self.selectionBlock = selectionBlock;
         self.deselectionBlock = deselectionBlock;
-        
-        self.asset = asset;
-        [self setUp];
-    }
-    
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame
-         withAssets:(PHAsset *)asset
-selectionVideoBlock:(VideoSelectionBlock)selectionVideoBlock
- deselectVideoBlock:(VideoSelectionBlock)deselectionVideoBlock
-{
-    self = [super initWithFrame:frame];
-    
-    if (self) {
-        
-        self.isImagePreview = NO;
-        self.isSelected = NO;
-        
-        self.selectionVideoBlock = selectionVideoBlock;
-        self.deselectionVideoBlock = deselectionVideoBlock;
         
         self.asset = asset;
         [self setUp];
@@ -101,33 +77,16 @@ selectionVideoBlock:(VideoSelectionBlock)selectionVideoBlock
         
         self.isSelected = NO;
         
-        if (self.isImagePreview) {
-            if (self.deselectionBlock) {
-                self.deselectionBlock(self.imageAsset);
-            }
-
-        } else {
-            if (self.deselectionVideoBlock) {
-                self.deselectionVideoBlock(self.asset);
-            }
-
-        }
         if (self.deselectionBlock) {
-            self.deselectionBlock(self.imageAsset);
+            self.deselectionBlock(self.asset);
         }
+
     } else {
         self.isSelected = YES;
-        if (self.isImagePreview) {
-            if (self.selectionBlock) {
-                self.selectionBlock(self.imageAsset);
-            }
-        } else {
-            if (self.selectionVideoBlock) {
-                self.selectionVideoBlock(self.asset);
-            }
-
+        
+        if (self.selectionBlock) {
+            self.selectionBlock(self.asset);
         }
-
     }
 }
 

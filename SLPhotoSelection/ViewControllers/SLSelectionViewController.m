@@ -8,14 +8,12 @@
 
 #import "SLSelectionViewController.h"
 #import "UIViewController+SLPhotoSelection.h"
-#import <AVFoundation/AVFoundation.h>
-#import <Photos/Photos.h>
-#import <Photos/PHImageManager.h>
-#import "SLPhotoView.h"
 
 @interface SLSelectionViewController ()
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -91,7 +89,26 @@
 - (void)multiplePhotoSelection
 {
     [self selectMultiplePhotoWithCompletionHandler:^(BOOL success, NSMutableArray *multiplePhotos) {
-        //TODO:
+        
+        if (success) {
+            float y = 0;
+            
+            for (PHAsset *asset in multiplePhotos) {
+                UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, self.scrollView.frame.size.width, self.scrollView.frame.size.width)];
+                [self.scrollView addSubview:imageView];
+                
+                [SLPhotoManager loadImage:asset completion:^(UIImage *image, NSDictionary *info) {
+                    imageView.image = image;
+                }];
+                
+                y += self.scrollView.frame.size.width;
+            }
+            
+            [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,
+                                                       self.scrollView.frame.size.width * multiplePhotos.count)];
+            
+        }
+        
     }];
 }
 
@@ -100,21 +117,28 @@
     [[SLPhotoView appearance] setSelectionNibNameView:@"SLCustomSelectedView"];
     
     [self selectMultipleVideoWithCompletionHandler:^(BOOL success, NSMutableArray *multipleVideo) {
-        //TODO:
-        for (PHAsset *asset in multipleVideo) {
-            [[PHImageManager defaultManager] requestPlayerItemForVideo:asset
-                                                               options:nil
-                                                         resultHandler:^(AVPlayerItem * _Nullable playerItem, NSDictionary * _Nullable info) {
-                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                 AVPlayer *avPlayer = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-                                                                 AVPlayerLayer *avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
-                                                                 avPlayerLayer.frame = self.imageView.bounds;
-                                                                 [self.imageView.layer addSublayer:avPlayerLayer];
-                                                                 [avPlayer seekToTime:kCMTimeZero];
-                                                                 [avPlayer play];
-                                                             });
-                                                         }];
+        if (success) {
+            float y = 0;
             
+            for (PHAsset *asset in multipleVideo) {
+                UIView *contentView = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, self.scrollView.frame.size.width, self.scrollView.frame.size.width)];
+                [self.scrollView addSubview:contentView];
+                
+                [SLPhotoManager loadVideo:asset
+                               completion:^(AVPlayerItem *playerItem, NSDictionary *info) {
+                                   AVPlayer *avPlayer = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+                                   AVPlayerLayer *avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
+                                   avPlayerLayer.frame = contentView.bounds;
+                                   [contentView.layer addSublayer:avPlayerLayer];
+                                   [avPlayer seekToTime:kCMTimeZero];
+                                   [avPlayer play];
+                               }];
+                
+                y += self.scrollView.frame.size.width;
+            }
+            
+            [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,
+                                                       self.scrollView.frame.size.width * multipleVideo.count)];
         }
     }];
 }

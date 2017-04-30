@@ -139,4 +139,18 @@
     [SLPhotoManager loadImage:asset completion:completion];
 }
 
++ (void)loadVideo:(PHAsset *)asset
+       completion:(void(^)(AVPlayerItem *playerItem, NSDictionary *info))completion;
+{
+    [[PHImageManager defaultManager] requestPlayerItemForVideo:asset
+                                                       options:nil
+                                                 resultHandler:^(AVPlayerItem * _Nullable playerItem, NSDictionary * _Nullable info) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            if (completion) {
+                                                                completion(playerItem, info);
+                                                            }
+                                                        });
+                                                 }];
+}
+
 @end

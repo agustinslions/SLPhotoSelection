@@ -9,27 +9,19 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-typedef void (^ImageSelectionBlock)(UIImage *image);
-typedef void (^VideoSelectionBlock)(PHAsset *video);
+typedef void (^SLAssetSelectionBlock)(PHAsset *asset);
 
 @interface SLPhotoView : UIView
 
-@property (copy) ImageSelectionBlock selectionBlock;
-@property (copy) ImageSelectionBlock deselectionBlock;
+@property (copy) SLAssetSelectionBlock selectionBlock;
+@property (copy) SLAssetSelectionBlock deselectionBlock;
 
-@property (copy) VideoSelectionBlock selectionVideoBlock;
-@property (copy) VideoSelectionBlock deselectionVideoBlock;
 
 @property (nonatomic, strong) NSString *selectionNibNameView UI_APPEARANCE_SELECTOR;
 
 - (id)initWithFrame:(CGRect)frame
          withAssets:(PHAsset *)asset
-     selectionBlock:(ImageSelectionBlock)selectionBlock
-      deselectBlock:(ImageSelectionBlock)deselectionBlock;
-
-- (id)initWithFrame:(CGRect)frame
-         withAssets:(PHAsset *)asset
-selectionVideoBlock:(VideoSelectionBlock)selectionVideoBlock
- deselectVideoBlock:(VideoSelectionBlock)deselectionVideoBlock;
+     selectionBlock:(SLAssetSelectionBlock)selectionBlock
+      deselectBlock:(SLAssetSelectionBlock)deselectionBlock;
 
 @end
