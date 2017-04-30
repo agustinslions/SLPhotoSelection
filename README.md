@@ -8,7 +8,8 @@ This project easily implements the selection of a photo using the camera or save
 
 * Manual
 
-You need to add to your project the file
+You need to add this files to your project:
+  - The folder SLImagePickerController with all files.
   - UIViewController+SLPhotoSelection.h
   - UIViewController+SLPhotoSelection.m
 
@@ -18,23 +19,70 @@ Import the file to your class.
 ```
 #import "UIViewController+SLPhotoSelection.h"
 ```
-
-Then add the next line in order to show the component.
-
+ 
+You have four methods to gettings images and videos.
+ 
+The next methods allow selects a single image:
 ```
-    [self addPhotoWithCompletionHandler:^(BOOL success, UIImage *image) {
+    [self addPhotoWithCompletionHandler:^(BOOL success, id object) {
       if (success) {
-        //When select your photo
+        //This method return a UIImage in object attribute.
       } else {
         //When fail or cancel 
       }
     }];
 ```
+The next methods allow selects a single video:
+```
+    [self addVideoWithCompletionHandler:^(BOOL success, id object) {
+      if (success) {
+        //This method return a AVAsset in object attribute.
+      } else {
+        //When fail or cancel 
+      }
+    }];
+```
+
+The next methods allow selects multiples images:
+```
+    [self selectMultiplePhotoWithCompletionHandler:^(BOOL success, NSMutableArray *multiplePhotos) {
+      if (success) {
+        //This method return a NSMutableArray of PHAssets.
+      } else {
+        //When fail or cancel 
+      }
+    }];
+```
+
+The next methods allow selects multiples videos:
+```
+    [self selectMultipleVideoWithCompletionHandler:^(BOOL success, NSMutableArray *multipleVideo) {
+      if (success) {
+        //This method return a NSMutableArray of PHAssets.
+      } else {
+        //When fail or cancel 
+      }
+    }];
+```
+
+Also I added a SLPhotoManage file. This class have two methods to getting a UIImage from a PHAssets and getting a AVPlayerItem from a PHAssets (for videos.)
+```
+  [SLPhotoManager loadImage:asset completion:^(UIImage *image, NSDictionary *info) {
+  
+  }];
+```
+
+```
+  [SLPhotoManager loadVideo:asset completion:^(AVPlayerItem *playerItem, NSDictionary *info) {
+
+  }];
+```
+
 ## Author
 
-[![Agustín De León](https://avatars2.githubusercontent.com/u/18148345?v=3&s=460)](https://github.com/agustinslions) |
----|---|---
-[Agustín De León](https://github.com/agustinslions) |
+[![Agustín De León](https://avatars2.githubusercontent.com/u/18148345?v=3&s=460)](https://github.com/agustinslions)
+
+[Agustín De León](https://github.com/agustinslions)
 
 ## License
 
