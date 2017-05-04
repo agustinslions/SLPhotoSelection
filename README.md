@@ -12,6 +12,19 @@ You need to add this files to your project:
   - The folder SLImagePickerController with all files.
   - UIViewController+SLPhotoSelection.h
   - UIViewController+SLPhotoSelection.m
+  
+  
+ After iOS 10 you have to define and provide a usage description of all the system’s privacy-sensitive data accessed by your app in Info.plist.
+ 
+ You need to add the next key value pair:
+
+```
+<key>NSCameraUsageDescription</key>
+<string>This app needs access to the camera to take photos.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>This app needs access to photos.</string>
+
+```
 
 ## Usage
 
