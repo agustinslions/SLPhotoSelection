@@ -6,14 +6,21 @@ This project easily implements the selection of a photo using the camera or save
 
 ## Installation
 
-* Manual
+### CocoaPod
+
+```
+	pod 'SLPhotoSelection'
+```
+
+### Manual
 
 You need to add this files to your project:
   - The folder SLImagePickerController with all files.
   - UIViewController+SLPhotoSelection.h
   - UIViewController+SLPhotoSelection.m
   
-  
+## Configuration
+
  After iOS 10 you have to define and provide a usage description of all the system’s privacy-sensitive data accessed by your app in Info.plist.
  
  You need to add the next key value pair:
