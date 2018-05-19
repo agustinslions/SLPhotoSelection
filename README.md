@@ -80,13 +80,13 @@ The next methods allow selects multiples videos:
 
 Also I added a SLPhotoManage file. This class have two methods to getting a UIImage from a PHAssets and getting a AVPlayerItem from a PHAssets (for videos.)
 ```
-  [SLPhotoManager loadImage:asset completion:^(UIImage *image, NSDictionary *info) {
+  [SLPhotoManager loadImage:asset targetSize:targetSize completion:^(UIImage *image, NSDictionary *info) {
   
   }];
 ```
 
 ```
-  [SLPhotoManager loadVideo:asset completion:^(AVPlayerItem *playerItem, NSDictionary *info) {
+  [SLPhotoManager loadVideo:asset targetSize:targetSize completion:^(AVPlayerItem *playerItem, NSDictionary *info) {
 
   }];
 ```
