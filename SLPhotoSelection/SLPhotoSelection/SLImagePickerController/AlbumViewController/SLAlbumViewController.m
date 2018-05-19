@@ -9,6 +9,7 @@
 #import "SLAlbumViewController.h"
 #import "SLAlbumTableViewCell.h"
 #import "SLPhotoViewController.h"
+#import "SLConstants.h"
 
 #import <Photos/Photos.h>
 
@@ -30,12 +31,12 @@
     
     [self setUpNavigationBarButton];
     
+    SLwself;
+    
     [SLPhotoManager requestAuthorizationCompletion:^{
-        [self getAlbumsAssets];
+        [wself getAlbumsAssets];
     } failure:^{
-        if (self.multipleCompletionBlock) {
-            self.multipleCompletionBlock(NO, nil);
-        }
+        BLOCK_EXEC_MAIN_THREAD(wself.multipleCompletionBlock, NO, nil);
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }
@@ -66,9 +67,7 @@
 
 - (void)cancelAction
 {
-    if (self.multipleCompletionBlock) {
-        self.multipleCompletionBlock(NO, nil);
-    }
+    BLOCK_EXEC_MAIN_THREAD(self.multipleCompletionBlock, NO, nil);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -91,8 +90,9 @@
     PHAssetCollection *assetCollection = self.albumSelections[indexPath.row];
     
     cell.albumNameLabel.text = [assetCollection localizedTitle];
-    
+
     [SLPhotoManager loadFirstThumbnailForAssetCollection:assetCollection
+                                              targetSize:cell.photoAlbumImage.frame.size
                                            withFilesType:self.selectionType
                                               completion:^(UIImage *image, NSDictionary *info) {
                                                   cell.photoAlbumImage.image = image;

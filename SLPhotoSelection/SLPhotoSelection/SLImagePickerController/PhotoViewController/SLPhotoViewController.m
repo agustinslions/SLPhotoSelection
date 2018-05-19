@@ -7,14 +7,16 @@
 //
 
 #import "SLPhotoViewController.h"
-#import "SLPhotoView.h"
+#import "SLConstants.h"
+#import "SLPhotoCollectionViewCell.h"
+#import "SLPhotoCollectionFlowLayout.h"
 
 #define kItemsPerLine       3
 #define kWidthImageView     (self.view.frame.size.width / kItemsPerLine)
 
-@interface SLPhotoViewController ()
+@interface SLPhotoViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray *photoArray;
 
@@ -31,10 +33,10 @@
     // Do any additional setup after loading the view from its nib.
     
     [self initializeAttributes];
-    [self setUpPhotoImages];
-    [self setUpNavigationBarButton];
+    [self setupPhotoImages];
+    [self setupNavigationBarButton];
     
-    [self setUpScrollImages];
+    [self setupCollectionView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,13 +53,13 @@
 
 #pragma mark - Setup methods
 
-- (void)setUpPhotoImages
+- (void)setupPhotoImages
 {
     self.photoArray = [SLPhotoManager getPHAssetsForAssetCollection:self.assetCollections
                                                       withFilesType:self.selectionType];
 }
 
-- (void)setUpNavigationBarButton
+- (void)setupNavigationBarButton
 {
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                    target:self
@@ -65,26 +67,35 @@
     [self.navigationItem setRightBarButtonItem:doneBarButton];
 }
 
-- (void)setUpScrollImages
+- (void)setupCollectionView
 {
-    for (int i = 0; i < [self.photoArray count]; i++) {
-        CGRect frame = CGRectMake((i % kItemsPerLine) * kWidthImageView,
-                                  kWidthImageView * (int)(i/kItemsPerLine), kWidthImageView, kWidthImageView);
-        
-        SLPhotoView *photoView;
-        
-        photoView = [[SLPhotoView alloc] initWithFrame:frame
-                                            withAssets:self.photoArray[i]
-                                        selectionBlock:^(PHAsset *asset) {
-                                            [self selection:asset];
-                                        } deselectBlock:^(PHAsset *asset) {
-                                            [self deselection:asset];
-                                        }];
-        
-        [self.scrollView addSubview:photoView];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"SLPhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SLPhotoCollectionViewCellReusableIdentifier"];
+
+    self.collectionView.collectionViewLayout = [[SLPhotoCollectionFlowLayout alloc] init];
+    [self.collectionView reloadData];
+}
+
+#pragma mark - UICollectionViewDelegate methods
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self.photoArray count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    SLPhotoCollectionViewCell *cell = (SLPhotoCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SLPhotoCollectionViewCellReusableIdentifier" forIndexPath:indexPath];
+    [cell setAsset:self.photoArray[indexPath.row]];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SLPhotoCollectionViewCell *cell = (SLPhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setIsSelected:!cell.isSelected];
+    if (cell.isSelected) {
+        [self selection:cell.asset];
+    } else {
+        [self deselection:cell.asset];
     }
-    
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, kWidthImageView * self.photoArray.count)];
 }
 
 #pragma mark - Actions methods
@@ -101,10 +112,7 @@
 
 - (void)doneAction
 {
-    if (self.multipleCompletionBlock) {
-        self.multipleCompletionBlock(YES, self.selectedPhotoArray);
-        self.multipleCompletionBlock = nil;
-    }
+    BLOCK_EXEC_MAIN_THREAD(self.multipleCompletionBlock, YES, self.selectedPhotoArray);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -10,8 +10,8 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 #import <Photos/PHImageManager.h>
-#import "SLPhotoView.h"
 #import "SLPhotoManager.h"
+#import "SLPhotoCollectionViewCell.h"
 
 typedef enum {
     SLSinglePhotoType,

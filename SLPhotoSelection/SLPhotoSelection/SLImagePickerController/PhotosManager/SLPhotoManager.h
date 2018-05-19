@@ -15,6 +15,9 @@ typedef enum {
     SLAllType
 } SLSelectionType;
 
+typedef void (^SLCompletionBlock)(void);
+typedef void (^SLFailureBlock)(void);
+
 @interface SLPhotoManager : NSObject
 
 /**
@@ -24,8 +27,11 @@ typedef enum {
  @param failure
  The failure is executed when the authorization wasn't allowed by the user.
 */
-+ (void)requestAuthorizationCompletion:(void(^)())completion
-                               failure:(void(^)())failure;
++ (void)requestAuthorizationCompletion:(SLCompletionBlock)completion
+                               failure:(SLFailureBlock)failure;
+
++ (void)requestNotAuthorizedCompletion:(SLCompletionBlock)completion
+                               failure:(SLFailureBlock)failure;
 
 + (NSMutableArray *)getAlbumsWithFilesType:(SLSelectionType)selectionType;
 
@@ -40,9 +46,12 @@ typedef enum {
  The completion this method return an image and dictionary with all info of the PHAsset.
  */
 + (void)loadImage:(PHAsset *)asset
+       targetSize:(CGSize)targetSize
        completion:(void(^)(UIImage *image, NSDictionary *info))completion;
 
+
 + (void)loadFirstThumbnailForAssetCollection:(PHAssetCollection *)assetCollection
+                                  targetSize:(CGSize)targetSize
                                withFilesType:(SLSelectionType)selectionType
                                   completion:(void(^)(UIImage *image, NSDictionary *info))completion;
 

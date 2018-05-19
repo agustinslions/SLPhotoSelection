@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[SLPhotoCollectionViewCell appearance] setSelectionNibNameView:@"SLCustomSelectedView"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,9 +96,14 @@
             
             for (PHAsset *asset in multiplePhotos) {
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, self.scrollView.frame.size.width, self.scrollView.frame.size.width)];
+                imageView.clipsToBounds = YES;
+                imageView.contentMode = UIViewContentModeScaleAspectFill;
+                
                 [self.scrollView addSubview:imageView];
                 
-                [SLPhotoManager loadImage:asset completion:^(UIImage *image, NSDictionary *info) {
+                [SLPhotoManager loadImage:asset
+                               targetSize:PHImageManagerMaximumSize
+                               completion:^(UIImage *image, NSDictionary *info) {
                     imageView.image = image;
                 }];
                 
@@ -114,8 +120,6 @@
 
 - (void)multipleVideoSelection
 {
-    [[SLPhotoView appearance] setSelectionNibNameView:@"SLCustomSelectedView"];
-    
     [self selectMultipleVideoWithCompletionHandler:^(BOOL success, NSMutableArray *multipleVideo) {
         if (success) {
             float y = 0;
